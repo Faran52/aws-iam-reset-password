@@ -1,0 +1,9 @@
+#====================
+# Ignored Files
+#====================
+
+# web-ui
+apps/web-ui
+
+# streams-service
+services/streams-service

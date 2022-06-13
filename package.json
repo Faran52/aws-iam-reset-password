@@ -1,0 +1,52 @@
+{
+  "name": "aws-reset-iam-password",
+  "version": "0.0.2",
+  "description": "Interactive CLI utility to easily reset AWS IAM password for AWS profiles",
+  "author": "Faran Ali",
+  "license": "MIT",
+  "bugs": "https://github.com/faran52/aws-reset-iam-password/issues",
+  "homepage": "https://github.com/faran52/aws-reset-iam-password",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faran52/aws-reset-iam-password.git"
+  },
+  "main": "./lib/cli.js",
+  "bin": {
+    "aws-reset-iam-password": "./lib/cli.js"
+  },
+  "scripts": {
+    "prepare": "gulp build",
+    "build": "gulp build",
+    "dev": "gulp watch",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@babel/runtime": "7.18.3",
+    "aws-sdk": "^2.1152.0",
+    "chalk": "4.1.2",
+    "cli-table": "0.3.11",
+    "del": "6.1.1",
+    "generate-password": "^1.7.0",
+    "inquirer": "^8.2.4",
+    "progress": "^2.0.3",
+    "yargs": "17.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.18.5",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/plugin-transform-runtime": "7.18.5",
+    "@babel/preset-env": "7.18.2",
+    "eslint": "~8.17.0",
+    "eslint-config-airbnb-base": "~15.0.0",
+    "eslint-plugin-import": "~2.26.0",
+    "gulp": "4.0.2",
+    "gulp-babel": "8.0.0"
+  },
+  "keywords": [
+    "npm",
+    "reset",
+    "aws",
+    "cli",
+    "iam"
+  ]
+}
