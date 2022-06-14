@@ -29,13 +29,13 @@ You can run this directly using the command below:
 npx aws-reset-iam-password
 ```
 ###
-- For `AWS alias profile` enter comma seperated profiles *****profile1,profile2*****  (Default value is ****all****)
+- For `AWS alias profile` Enter comma seperated profiles *****profile1,profile2*****  (Default value is ****all****)
 - For `AWS credentials file path` Enter the path to credentials/config file (Default value is *****~/.aws/credentials*****)
 -- Note: Credentials file path is only needed if all alias profile is entered
 - For `AWS user name` Enter your ***AWS IAM*** username
 
 
-## Note:
+#### Note:
 - This script will only update those **AWS IAM Passwords** which are configured for access & secret keys in your machine!
 
 [downloads-image]: https://img.shields.io/npm/dt/aws-reset-iam-password.svg
