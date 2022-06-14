@@ -1,6 +1,6 @@
 {
   "name": "aws-reset-iam-password",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Interactive CLI utility to easily reset AWS IAM password for AWS profiles",
   "author": "Faran Ali",
   "license": "MIT",
