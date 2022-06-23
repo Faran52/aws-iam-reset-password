@@ -3,12 +3,12 @@ const babel = require('gulp-babel');
 const del = require('del');
 
 const SRC = 'src/**/*.js';
-const LIB = './lib';
+const DIST = './dist';
 
 function build() {
   return gulp.src(SRC)
     .pipe(babel())
-    .pipe(gulp.dest(LIB));
+    .pipe(gulp.dest(DIST));
 }
 
 function watch() {
@@ -16,7 +16,7 @@ function watch() {
 }
 
 function clean() {
-  return del('lib');
+  return del('dist');
 }
 
 gulp.task('default', watch);

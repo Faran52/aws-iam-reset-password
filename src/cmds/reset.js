@@ -15,16 +15,15 @@ class Reset {
     } = CliUtil.cliTextFormats();
 
     let profiles = await GetFromCli.getProfiles();
+    const filePath = await GetFromCli.getFilePath();
 
     // Only get AWS Profiles If All Is Needed
     if (profiles[0] === 'all') {
-      const filePath = await GetFromCli.getFilePath();
-
       console.log(
         `Extracting ${normal('AWS')} profiles from ${normal(filePath)}...`,
       );
 
-      profiles = await this.#getProfiles(filePath);
+      profiles = await this.#loadProfiles(filePath);
       if (profiles.length === 0) {
         console.log(
           error(`No profiles found at ${filePath}!`),
@@ -38,7 +37,7 @@ class Reset {
     }
 
     const username = await GetFromCli.getUsername();
-    const responseRows = await this.#resetPasswords(username, profiles);
+    const responseRows = await this.#resetPasswords(filePath, username, profiles);
 
     let table = [
       [
@@ -51,7 +50,7 @@ class Reset {
 
     table = table.map((r, index) => {
       if (index === 0) {
-        r = r.map((r) => normal(r));
+        r = r.map((_r) => normal(_r));
       } else {
         r[0] = normal(r[0]);
         r[1] = success(r[1]);
@@ -72,11 +71,12 @@ class Reset {
   /**
    * Resets IAM password for provided profile array
    *
+   * @param {String} filePath
    * @param {String} username
    * @param {Array<String>} profiles
    * @returns {Promise<Array<String>>}
    */
-  static async #resetPasswords(username, profiles) {
+  static async #resetPasswords(filePath, username, profiles) {
     const password = generator.generate({
       length: 20,
       numbers: true,
@@ -94,7 +94,10 @@ class Reset {
     // eslint-disable-next-line no-restricted-syntax
     for await (const c of profiles) {
       if (c !== '') {
-        const credentials = new AWS.SharedIniFileCredentials({ profile: c });
+        const credentials = new AWS.SharedIniFileCredentials({
+          filename: filePath,
+          profile: c,
+        });
         const iam = new AWS.IAM({
           apiVersion: '2010-05-08',
           credentials,
@@ -132,7 +135,7 @@ class Reset {
    *
    * @returns {Promise<Array<*>>}
    */
-  static async #getProfiles(filePath) {
+  static async #loadProfiles(filePath) {
     const results = [];
     try {
       const regex = /\[([^\][]*)]/g;
